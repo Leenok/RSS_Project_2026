@@ -15,14 +15,15 @@
 }
 
 .imageContainer {
-    height: 180px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .image {
-    max-width: 100%;
+    min-width: 170px;
+    max-width: 270px;
     max-height: 100%;
     object-fit: contain;
 }

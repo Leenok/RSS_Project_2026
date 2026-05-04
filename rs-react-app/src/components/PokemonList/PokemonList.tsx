@@ -1,7 +1,6 @@
 import React from 'react';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { type PokemonDetail } from '../../types/pokemon';
-// @ts-ignore
 import styles from './PokemonList.module.css';
 
 interface PokemonListProps {

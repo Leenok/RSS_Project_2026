@@ -3,7 +3,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import PokemonList from './components/PokemonList/PokemonList';
 import type { PokemonDetail } from './types/pokemon';
 import { fetchPokemonList, fetchPokemonDetail } from './services/pokemonApi';
-// // import './App.css';
+import './App.css';
 
 class App extends React.Component {
   state = {
