@@ -1,6 +1,7 @@
 import React from 'react';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { type PokemonDetail } from '../../types/pokemon';
+import Spinner from '../Spinner/Spinner';
 import styles from './PokemonList.module.css';
 
 interface PokemonListProps {
@@ -14,7 +15,10 @@ class PokemonList extends React.Component<PokemonListProps> {
         const { pokemons, loading, error } = this.props;
 
         if (loading) {
-            return <div className={styles.loading}>Загрузка покемонов...</div>;
+            return <div className={styles.loading}>
+                <Spinner size={60} color="#4CAF50" />
+                Загрузка покемонов...
+            </div>;
         }
 
         if (error) {

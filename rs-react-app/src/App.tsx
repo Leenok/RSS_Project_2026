@@ -11,7 +11,8 @@ class App extends React.Component {
     filteredPokemons: [] as PokemonDetail[],
     loading: false,
     error: null as string | null,
-    searchQuery: ''
+    searchQuery: '',
+    limit: 1000,
   };
 
   componentDidMount() {
@@ -22,7 +23,7 @@ class App extends React.Component {
     this.setState({ loading: true, error: null });
 
     try {
-      const listData = await fetchPokemonList(50);
+      const listData = await fetchPokemonList(this.state.limit);
       const detailedPromises = listData.results.map(pokemon =>
         fetchPokemonDetail(pokemon.name)
       );
