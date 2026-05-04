@@ -3,7 +3,6 @@ import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
-    onLimitChange: (limit: number) => void;
 }
 
 class SearchBar extends React.Component<SearchBarProps> {

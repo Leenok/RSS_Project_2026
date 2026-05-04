@@ -3,6 +3,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import PokemonList from './components/PokemonList/PokemonList';
 import type { PokemonDetail } from './types/pokemon';
 import { fetchPokemonList, fetchPokemonDetail } from './services/pokemonApi';
+import ErrorTest from './components/ErrorTest/ErrorTest';
 import './App.css';
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
     error: null as string | null,
     searchQuery: '',
     limit: 1000,
+    shouldCrash: false
   };
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class App extends React.Component {
       });
     } catch (error) {
       this.setState({
-        error: 'Ошибка при загрузке покемонов',
+        error: 'Error loading Pokemon',
         loading: false
       });
       console.error('Error loading pokemon:', error);
@@ -59,6 +61,11 @@ class App extends React.Component {
     this.setState({ filteredPokemons: filtered });
   };
 
+  triggerTestError = () => {
+    this.setState({ shouldCrash: true });
+    throw new Error('Тестовая ошибка приложения');
+  };
+
   render() {
     const { filteredPokemons, loading, error } = this.state;
 
@@ -71,12 +78,22 @@ class App extends React.Component {
 
         <main className="App-main">
           <SearchBar onSearch={this.handleSearch} />
+          <ErrorTest shouldCrash={this.state.shouldCrash} />
           <PokemonList
             pokemons={filteredPokemons}
             loading={loading}
             error={error}
           />
         </main>
+        <footer>
+          <button
+            type="button"
+            onClick={this.triggerTestError}
+            className="test-error-button"
+          >
+            Test error (for demonstration)
+          </button>
+        </footer>
       </div>
     );
   }
