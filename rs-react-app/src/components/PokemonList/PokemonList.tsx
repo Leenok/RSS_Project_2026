@@ -1,37 +1,35 @@
 import React from 'react';
-import { type Pokemon, type PokemonDetail } from '../../types/pokemon';
 import PokemonCard from '../PokemonCard/PokemonCard';
+import { type PokemonDetail } from '../../types/pokemon';
+// @ts-ignore
+import styles from './PokemonList.module.css';
 
 interface PokemonListProps {
-    pokemons: Pokemon[];
-    selectedPokemon: PokemonDetail | null;
+    pokemons: PokemonDetail[];
+    loading: boolean;
+    error: string | null;
 }
 
 class PokemonList extends React.Component<PokemonListProps> {
     render() {
-        const { pokemons, selectedPokemon } = this.props;
-        console.log(this.props)
+        const { pokemons, loading, error } = this.props;
+
+        if (loading) {
+            return <div className={styles.loading}>Загрузка покемонов...</div>;
+        }
+
+        if (error) {
+            return <div className={styles.error}>{error}</div>;
+        }
 
         if (pokemons.length === 0) {
-            return <p >Покемоны не найдены</p>;
+            return <div className={styles.empty}>Покемоны не найдены</div>;
         }
 
         return (
-            <div >
+            <div className={styles.list}>
                 {pokemons.map((pokemon) => (
-                    <PokemonCard
-                        key={pokemon.name}
-                        pokemon={
-                            selectedPokemon && selectedPokemon.name === pokemon.name
-                                ? selectedPokemon
-                                : {
-                                    id: 0,
-                                    name: pokemon.name,
-                                    sprites: { front_default: '' },
-                                    types: []
-                                }
-                        }
-                    />
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
                 ))}
             </div>
         );

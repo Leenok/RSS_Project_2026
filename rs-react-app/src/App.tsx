@@ -1,36 +1,36 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
-// import SearchSection from './components/SearchSection/SearchSection'
-// import PokemonList from './components/PokemonList/PokemonList'
 import React from 'react';
-
-import { fetchPokemonList } from './services/pokemonApi';
-import { type PokemonListResponse } from './types/pokemon';
-// import { fetchPokemonList } from './services/pokemonApi';
-// import './App.css'
-
+import SearchBar from './components/SearchBar/SearchBar';
+import PokemonList from './components/PokemonList/PokemonList';
+import type { PokemonDetail } from './types/pokemon';
+import { fetchPokemonList, fetchPokemonDetail } from './services/pokemonApi';
+// // import './App.css';
 
 class App extends React.Component {
   state = {
-    pokemons: [],
+    allPokemons: [] as PokemonDetail[],
+    filteredPokemons: [] as PokemonDetail[],
     loading: false,
     error: null as string | null,
-    limit: 20
+    searchQuery: ''
   };
 
   componentDidMount() {
-    this.loadPokemon();
+    this.loadAllPokemon();
   }
 
-  loadPokemon = async (limit: number = this.state.limit) => {
+  loadAllPokemon = async () => {
     this.setState({ loading: true, error: null });
 
     try {
-      const data: PokemonListResponse = await fetchPokemonList(limit);
+      const listData = await fetchPokemonList(50);
+      const detailedPromises = listData.results.map(pokemon =>
+        fetchPokemonDetail(pokemon.name)
+      );
+      const detailedData = await Promise.all(detailedPromises);
+
       this.setState({
-        pokemons: data.results,
+        allPokemons: detailedData,
+        filteredPokemons: detailedData,
         loading: false
       });
     } catch (error) {
@@ -38,57 +38,44 @@ class App extends React.Component {
         error: 'Ошибка при загрузке покемонов',
         loading: false
       });
-      console.error('Error fetching pokemon:', error);
+      console.error('Error loading pokemon:', error);
     }
   };
 
-  handleLimitChange = (limit: number) => {
-    this.setState({ limit }, () => {
-      this.loadPokemon(limit);
-    });
+  handleSearch = async (query: string) => {
+    this.setState({ searchQuery: query });
+
+    if (!query.trim()) {
+      this.setState({ filteredPokemons: this.state.allPokemons });
+      return;
+    }
+
+    const lowerCaseQuery = query.toLowerCase();
+    const filtered = this.state.allPokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(lowerCaseQuery)
+    );
+
+    this.setState({ filteredPokemons: filtered });
   };
 
   render() {
-    const { pokemons, loading, error } = this.state;
+    const { filteredPokemons, loading, error } = this.state;
 
     return (
-      <div className="app">
-        <h1>Покемон Поиск</h1>
+      <div className="App">
+        <header className="App-header">
+          <h1> Search pokemons</h1>
+          <p>Find your favorite Pokemon by name!</p>
+        </header>
 
-        {error && <div className="error">{error}</div>}
-
-        <div>
-          <button
-            onClick={() => this.handleLimitChange(10)}
-            disabled={this.state.limit === 10}
-          >
-            10 покемонов
-          </button>
-          <button
-            onClick={() => this.handleLimitChange(20)}
-            disabled={this.state.limit === 20}
-          >
-            20 покемонов
-          </button>
-          <button
-            onClick={() => this.handleLimitChange(50)}
-            disabled={this.state.limit === 50}
-          >
-            50 покемонов
-          </button>
-        </div>
-
-        {loading ? (
-          <div>Загрузка...</div>
-        ) : (
-          <ul>
-            {pokemons.map((pokemon, index) => (
-              <li key={pokemon.name}>
-                {index + 1}. {pokemon.name}
-              </li>
-            ))}
-          </ul>
-        )}
+        <main className="App-main">
+          <SearchBar onSearch={this.handleSearch} />
+          <PokemonList
+            pokemons={filteredPokemons}
+            loading={loading}
+            error={error}
+          />
+        </main>
       </div>
     );
   }

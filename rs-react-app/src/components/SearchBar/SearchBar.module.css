@@ -1,0 +1,18 @@
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.searchInput {
+    width: 300px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+.searchInput:focus {
+    border-color: #4CAF50;
+}
