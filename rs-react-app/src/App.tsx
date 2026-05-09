@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import PokemonList from './components/PokemonList/PokemonList';
@@ -13,7 +14,7 @@ class App extends React.Component {
     loading: false,
     error: null as string | null,
     searchQuery: '',
-    limit: 1000,
+    limit: 50,          // ← было 1000, это и было причиной проблемы
     shouldCrash: false
   };
 
@@ -26,10 +27,19 @@ class App extends React.Component {
 
     try {
       const listData = await fetchPokemonList(this.state.limit);
-      const detailedPromises = listData.results.map(pokemon =>
-        fetchPokemonDetail(pokemon.name)
-      );
-      const detailedData = await Promise.all(detailedPromises);
+
+      // Загружаем детали батчами по 10, а не 1000 запросов одновременно
+      const results = listData.results;
+      const batchSize = 10;
+      const detailedData: PokemonDetail[] = [];
+
+      for (let i = 0; i < results.length; i += batchSize) {
+        const batch = results.slice(i, i + batchSize);
+        const batchDetails = await Promise.all(
+          batch.map(pokemon => fetchPokemonDetail(pokemon.name))
+        );
+        detailedData.push(...batchDetails);
+      }
 
       this.setState({
         allPokemons: detailedData,
@@ -45,7 +55,7 @@ class App extends React.Component {
     }
   };
 
-  handleSearch = async (query: string) => {
+  handleSearch = (query: string) => {
     this.setState({ searchQuery: query });
 
     if (!query.trim()) {
@@ -72,10 +82,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1> Search pokemons</h1>
+          <h1>Search pokemons</h1>
           <p>Find your favorite Pokemon by name!</p>
         </header>
-
         <main className="App-main">
           <SearchBar onSearch={this.handleSearch} />
           <ErrorTest shouldCrash={this.state.shouldCrash} />
