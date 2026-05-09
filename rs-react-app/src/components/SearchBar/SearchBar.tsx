@@ -1,6 +1,8 @@
 import React, { type ChangeEvent, type FormEvent } from 'react';
 import styles from './SearchBar.module.css';
 
+const STORAGE_KEY = 'pokemon_search_query';
+
 interface SearchBarProps {
     onSearch: (query: string) => void;
 }
@@ -10,13 +12,23 @@ class SearchBar extends React.Component<SearchBarProps> {
         searchQuery: '',
     };
 
+    componentDidMount() {
+        const saved = localStorage.getItem(STORAGE_KEY) ?? '';
+        if (saved) {
+            this.setState({ searchQuery: saved });
+            this.props.onSearch(saved);
+        }
+    }
+
     handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({ searchQuery: e.target.value });
     };
 
     handleSearchSubmit = (e: FormEvent) => {
         e.preventDefault();
-        this.props.onSearch(this.state.searchQuery.trim());
+        const trimmed = this.state.searchQuery.trim();
+        localStorage.setItem(STORAGE_KEY, trimmed);
+        this.props.onSearch(trimmed);
     };
 
     render() {
