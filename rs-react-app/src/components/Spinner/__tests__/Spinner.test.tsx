@@ -1,29 +1,41 @@
 import { render } from '@testing-library/react';
+import { describe, test, expect } from 'vitest';
 import Spinner from '../Spinner';
 
-describe('Spinner component', () => {
-  test('рендерится без ошибок с дефолтными пропсами', () => {
+describe('Spinner — rendering', () => {
+  test('рендерится без ошибок с дефолтными свойствами', () => {
     const { container } = render(<Spinner />);
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  test('применяет переданный размер через inline style', () => {
-    const { container } = render(<Spinner size={80} />);
-    const spinner = container.firstChild as HTMLElement;
-    expect(spinner.style.width).toBe('80px');
-    expect(spinner.style.height).toBe('80px');
-  });
-
-  test('применяет дефолтный размер 40px если size не передан', () => {
+  test('применяет дефолтный размер 40px', () => {
     const { container } = render(<Spinner />);
-    const spinner = container.firstChild as HTMLElement;
-    expect(spinner.style.width).toBe('40px');
-    expect(spinner.style.height).toBe('40px');
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.width).toBe('40px');
+    expect(el.style.height).toBe('40px');
   });
 
-  test('применяет переданный цвет через inline style', () => {
-    const { container } = render(<Spinner color="#FF0000" />);
-    const spinner = container.firstChild as HTMLElement;
-    expect(spinner.style.borderColor).toContain('#FF0000');
+  test('применяет переданный размер через prop size', () => {
+    const { container } = render(<Spinner size={80} />);
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.width).toBe('80px');
+    expect(el.style.height).toBe('80px');
+  });
+
+  test('применяет переданный цвет через prop color', () => {
+    const { container } = render(<Spinner color="rgb(255, 0, 0)" />);
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.borderColor).toContain('rgb(255, 0, 0) transparent');
+  });
+
+  test('применяет дефолтный цвет rgb(76, 175, 80)', () => {
+    const { container } = render(<Spinner />);
+    const el = container.firstChild as HTMLElement;
+    expect(el.style.borderColor).toContain('rgb(76, 175, 80) transparent');
+  });
+
+  test('рендерит div-элемент', () => {
+    const { container } = render(<Spinner />);
+    expect(container.firstChild?.nodeName).toBe('DIV');
   });
 });
