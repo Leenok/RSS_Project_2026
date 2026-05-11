@@ -47,10 +47,6 @@ afterEach(() => {
 const waitForPokemons = () =>
     waitFor(() => expect(screen.getByText('#1 bulbasaur')).toBeInTheDocument());
 
-// Альтернативное ожидание – когда Bulbasaur может отсутствовать (например, при поиске)
-const waitForCharmander = () =>
-    waitFor(() => expect(screen.getByText('#4 charmander')).toBeInTheDocument());
-
 describe('App — rendering', () => {
     test('рендерит заголовок "Search pokemons"', async () => {
         render(<App />);
