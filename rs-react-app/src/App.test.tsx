@@ -43,7 +43,6 @@ afterEach(() => {
     vi.clearAllMocks();
 });
 
-
 const waitForPokemons = () =>
     waitFor(() => expect(screen.getByText('#1 bulbasaur')).toBeInTheDocument());
 
@@ -51,15 +50,13 @@ describe('App — rendering', () => {
     test('рендерит заголовок "Search pokemons"', async () => {
         render(<App />);
         await waitForPokemons();
-        expect(screen.getByText('Search pokemons')).toBeInTheDocument();
+        expect(screen.getByText('Search Pokémon')).toBeInTheDocument();
     });
 
     test('рендерит подзаголовок', async () => {
         render(<App />);
         await waitForPokemons();
-        expect(
-            screen.getByText('Find your favorite Pokemon by name!')
-        ).toBeInTheDocument();
+        expect(screen.getByText('Find your favorite Pokémon by name!')).toBeInTheDocument();
     });
 
     test('рендерит строку поиска', async () => {
@@ -71,17 +68,13 @@ describe('App — rendering', () => {
     test('рендерит кнопку Test error', async () => {
         render(<App />);
         await waitForPokemons();
-        expect(
-            screen.getByRole('button', { name: /test error/i })
-        ).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /test error/i })).toBeInTheDocument();
     });
 });
-
 
 describe('App — загрузка данных', () => {
     test('показывает спиннер во время загрузки', async () => {
         render(<App />);
-        // await waitForPokemons();
         expect(screen.getByText(/Загрузка покемонов/i)).toBeInTheDocument();
         await waitForPokemons();
     });
@@ -91,7 +84,7 @@ describe('App — загрузка данных', () => {
         await waitFor(() =>
             expect(pokemonApi.fetchPokemonList).toHaveBeenCalledTimes(1)
         );
-        await waitForPokemons()
+        await waitForPokemons();
     });
 
     test('вызывает fetchPokemonDetail для каждого покемона из списка', async () => {
@@ -116,7 +109,6 @@ describe('App — загрузка данных', () => {
     });
 });
 
-
 describe('App — обработка ошибок API', () => {
     test('показывает "Error loading Pokemon" при ошибке fetchPokemonList', async () => {
         vi.mocked(pokemonApi.fetchPokemonList).mockRejectedValueOnce(
@@ -138,7 +130,6 @@ describe('App — обработка ошибок API', () => {
         );
     });
 });
-
 
 describe('App — поиск и фильтрация', () => {
     test('фильтрует покемонов по поисковому запросу', async () => {

@@ -9,7 +9,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-    const [savedQuery] = useLocalStorage<string>(STORAGE_KEY, '');
+    const [savedQuery, setSavedQuery] = useLocalStorage<string>(STORAGE_KEY, '');
     const [searchQuery, setSearchQuery] = useState<string>(savedQuery);
 
     useEffect(() => {
@@ -26,6 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     const handleSearchSubmit = (e: FormEvent) => {
         e.preventDefault();
         const trimmed = searchQuery.trim();
+        setSavedQuery(trimmed);
         onSearch(trimmed);
     };
 

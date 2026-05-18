@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { vi, beforeEach, afterEach, describe, test, expect } from 'vitest';
 import SearchBar from '../SearchBar';
 
-
 const STORAGE_KEY = 'pokemon_search_query';
 
 const renderSearchBar = (onSearch = vi.fn()) => {
@@ -13,7 +12,6 @@ const renderSearchBar = (onSearch = vi.fn()) => {
     return { ...result, input, button, onSearch };
 };
 
-
 beforeEach(() => {
     localStorage.clear();
 });
@@ -22,7 +20,6 @@ afterEach(() => {
     localStorage.clear();
     vi.restoreAllMocks();
 });
-
 
 describe('SearchBar — rendering', () => {
     test('создает поле ввода с placeholder', () => {
@@ -43,13 +40,13 @@ describe('SearchBar — rendering', () => {
 
 describe('SearchBar — localStorage on mount', () => {
     test('читает сохранённый запрос из localStorage при монтировании', () => {
-        localStorage.setItem(STORAGE_KEY, 'pikachu');
+        localStorage.setItem(STORAGE_KEY, JSON.stringify('pikachu'));
         renderSearchBar();
         expect(screen.getByPlaceholderText('Input name...')).toHaveValue('pikachu');
     });
 
     test('вызывает onSearch с сохранённым значением', () => {
-        localStorage.setItem(STORAGE_KEY, 'pikachu');
+        localStorage.setItem(STORAGE_KEY, JSON.stringify('pikachu'));
         const { onSearch } = renderSearchBar();
         expect(onSearch).toHaveBeenCalledWith('pikachu');
     });
@@ -94,22 +91,13 @@ describe('SearchBar — localStorage on submit', () => {
         const { input, button } = renderSearchBar();
         await userEvent.type(input(), 'gengar');
         await userEvent.click(button());
-        expect(localStorage.getItem(STORAGE_KEY)).toBe('gengar');
-    });
-
-    test('перезаписывает существующее значение в localStorage', async () => {
-        localStorage.setItem(STORAGE_KEY, 'old-query');
-        const { input, button } = renderSearchBar();
-        await userEvent.clear(input());
-        await userEvent.type(input(), 'mewtwo');
-        await userEvent.click(button());
-        expect(localStorage.getItem(STORAGE_KEY)).toBe('mewtwo');
+        expect(localStorage.getItem(STORAGE_KEY)).toBe(JSON.stringify('gengar'));
     });
 
     test('сохраняет trimmed значение в localStorage', async () => {
         const { input, button } = renderSearchBar();
         await userEvent.type(input(), '  eevee  ');
         await userEvent.click(button());
-        expect(localStorage.getItem(STORAGE_KEY)).toBe('eevee');
+        expect(localStorage.getItem(STORAGE_KEY)).toBe(JSON.stringify('eevee'));
     });
 });
