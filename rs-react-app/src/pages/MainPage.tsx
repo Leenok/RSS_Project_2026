@@ -12,10 +12,12 @@ import React from 'react';
 import '../App.css';
 
 const MainPage: React.FC = () => {
-    <header >
-        <h1>Search Pokémon</h1>
-        <p>Find your favorite Pokémon by name!</p>
-    </header>
+    return (
+        <header >
+            <h1>Search Pokémon</h1>
+            <p>Find your favorite Pokémon by name!</p>
+        </header>
+    )
 }
 export default MainPage;
 

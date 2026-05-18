@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-rou
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
 import MainPage from './pages/MainPage';
+import AboutPage from './pages/AboutPage';
 
 import React from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MainPage />,
+      },
+      {
+        path: 'about/',
+        element: <AboutPage />,
       },
 
     ],
