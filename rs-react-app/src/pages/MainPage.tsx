@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
-import { useSearchParams, useNavigate, useMatch } from 'react-router-dom';
+import { useSearchParams, Outlet, useNavigate, useMatch } from 'react-router-dom';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PokemonList from '../components/PokemonList/PokemonList';
+import Pagination from '../components/Pagination/Pagination';
 import ErrorTest from '../components/ErrorTest/ErrorTest';
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
 import styles from './MainPage.module.css';
@@ -9,8 +10,10 @@ import styles from './MainPage.module.css';
 const MainPage: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
+
     const detailMatch = useMatch('/details/:detailId');
     const hasDetail = Boolean(detailMatch);
+
     const urlPage = parseInt(searchParams.get('page') ?? '1', 10) || 1;
 
     const handlePageChange = useCallback(
@@ -28,7 +31,10 @@ const MainPage: React.FC = () => {
         paginatedPokemons,
         loading,
         error,
+        currentPage,
+        totalPages,
         handleSearch,
+        setPage,
     } = usePokemonSearch(urlPage, handlePageChange);
 
     const handleSelectPokemon = useCallback(
@@ -46,7 +52,6 @@ const MainPage: React.FC = () => {
 
     return (
         <div className={`${styles.layout} ${hasDetail ? styles.splitLayout : ''}`}>
-
             <div
                 className={styles.leftPanel}
                 onClick={hasDetail ? handleCloseDetail : undefined}
@@ -67,6 +72,14 @@ const MainPage: React.FC = () => {
                         error={error}
                         onSelectPokemon={handleSelectPokemon}
                     />
+
+                    {!loading && !error && (
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setPage}
+                        />
+                    )}
                 </main>
 
                 <footer>
@@ -81,6 +94,12 @@ const MainPage: React.FC = () => {
                     </button>
                 </footer>
             </div>
+
+            {hasDetail && (
+                <div className={styles.rightPanel} onClick={e => e.stopPropagation()}>
+                    <Outlet />
+                </div>
+            )}
         </div>
     );
 };
