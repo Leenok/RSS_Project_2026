@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PokemonDetailPanel from './components/PokemonDetailPanel/PokemonDetailPanel';
 import './App.css';
 
 const RootLayout: React.FC = () => (
@@ -23,6 +24,12 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MainPage />,
+        children: [
+          {
+            path: 'details/:detailId',
+            element: <PokemonDetailPanel />,
+          },
+        ],
       },
       {
         path: 'about',
