@@ -14,7 +14,7 @@ class App extends React.Component {
     loading: false,
     error: null as string | null,
     searchQuery: '',
-    limit: 50,          // ← было 1000, это и было причиной проблемы
+    limit: 50,
     shouldCrash: false
   };
 
@@ -28,7 +28,6 @@ class App extends React.Component {
     try {
       const listData = await fetchPokemonList(this.state.limit);
 
-      // Загружаем детали батчами по 10, а не 1000 запросов одновременно
       const results = listData.results;
       const batchSize = 10;
       const detailedData: PokemonDetail[] = [];
