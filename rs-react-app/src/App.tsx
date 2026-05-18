@@ -1,4 +1,3 @@
-// src/App.tsx
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
@@ -6,13 +5,15 @@ import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 
+import './App.css';
+
+
 import React from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import PokemonList from './components/PokemonList/PokemonList';
 import type { PokemonDetail } from './types/pokemon';
 import { fetchPokemonList, fetchPokemonDetail } from './services/pokemonApi';
 import ErrorTest from './components/ErrorTest/ErrorTest';
-import './App.css';
 
 const RootLayout: React.FC = () => (
   <div>

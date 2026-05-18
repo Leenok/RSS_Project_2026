@@ -1,7 +1,11 @@
-// src/App.tsx
 import React from 'react';
-// import SearchBar from '../components/SearchBar/SearchBar';
-// import PokemonList from '../components/PokemonList/PokemonList';
+import { useMatch } from 'react-router-dom';
+import SearchBar from '../components/SearchBar/SearchBar';
+import PokemonList from '../components/PokemonList/PokemonList';
+import ErrorTest from '../components/ErrorTest/ErrorTest';
+
+import styles from './MainPage.module.css';
+
 // import Pagination from '../components/Pagination/Pagination';
 // import ErrorTest from '../components/ErrorTest/ErrorTest';
 
@@ -9,14 +13,53 @@ import React from 'react';
 
 // import { fetchPokemonList, fetchPokemonDetail } from '../services/pokemonApi';
 
-import '../App.css';
+
 
 const MainPage: React.FC = () => {
+    // Match the nested details route to know if detail panel is open
+    const detailMatch = useMatch('/details/:detailId');
+    const hasDetail = Boolean(detailMatch);
+
     return (
-        <header >
-            <h1>Search Pokémon</h1>
-            <p>Find your favorite Pokémon by name!</p>
-        </header>
+        <div className={`${styles.layout} ${hasDetail ? styles.splitLayout : ''}`}>
+            <header >
+                <h1>Search Pokémon</h1>
+                <p>Find your favorite Pokémon by name!</p>
+            </header>
+
+            {/* Stop propagation so clicks inside don't close detail */}
+            <main className={styles.main} onClick={e => e.stopPropagation()}>
+                {/* <SearchBar onSearch={handleSearch} /> */}
+                <ErrorTest shouldCrash={false} />
+
+                {/* <PokemonList
+                    pokemons={paginatedPokemons}
+                    loading={loading}
+                    error={error}
+                    onSelectPokemon={handleSelectPokemon}
+                /> */}
+
+                {/* {!loading && !error && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={setPage}
+                    />
+                )} */}
+            </main>
+
+            <footer>
+                <button
+                    type="button"
+                    className={styles.testErrorButton}
+                    onClick={() => {
+                        throw new Error('Тестовая ошибка приложения');
+                    }}
+                >
+                    Test error (for demonstration)
+                </button>
+            </footer>
+        </div>
     )
 }
 export default MainPage;
