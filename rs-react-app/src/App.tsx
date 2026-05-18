@@ -4,6 +4,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import React from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -34,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: 'about/',
         element: <AboutPage />,
+      },
+      {
+        path: '404',
+        element: <NotFoundPage />,
+      },
+      {
+        path: '*',
+        element: <Navigate to="/404" replace />,
       },
 
     ],
