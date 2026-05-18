@@ -16,12 +16,29 @@ const AboutPage: React.FC = () => {
                 </ul>
             </section>
 
+            <section className={styles.card}>
+                <h2>Course</h2>
+                <p>
+                    Built for the{' '}
+                    <a
+                        href="https://rs.school/react/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.link}
+                    >
+                        RS School React Course
+                    </a>
+                    . RS School is a free community-based online education program run by the Rolling Scopes developer community.
+                </p>
+            </section>
+
 
 
             <Link to="/" className={styles.backLink}>
                 ← Back to home
             </Link>
         </div>
+
     );
 };
 
