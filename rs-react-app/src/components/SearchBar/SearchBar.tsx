@@ -1,6 +1,6 @@
 import { type ChangeEvent, type FormEvent, useState, useEffect } from 'react';
 import styles from './SearchBar.module.css';
-// import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const STORAGE_KEY = 'pokemon_search_query';
 
@@ -9,25 +9,24 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-    // const [savedQuery] = useLocalStorage<string>(STORAGE_KEY, '');
-    // const [searchQuery, setSearchQuery] = useState<string>(savedQuery);
+    const [savedQuery] = useLocalStorage<string>(STORAGE_KEY, '');
+    const [searchQuery, setSearchQuery] = useState<string>(savedQuery);
 
-    // useEffect(() => {
-    //     if (savedQuery) {
-    //         setSearchQuery(savedQuery);
-    //         onSearch(savedQuery);
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
+    useEffect(() => {
+        if (savedQuery) {
+            setSearchQuery(savedQuery);
+            onSearch(savedQuery);
+        }
+    }, []);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // setSearchQuery(e.target.value);
+        setSearchQuery(e.target.value);
     };
 
     const handleSearchSubmit = (e: FormEvent) => {
         e.preventDefault();
-        // const trimmed = searchQuery.trim();
-        // onSearch(trimmed);
+        const trimmed = searchQuery.trim();
+        onSearch(trimmed);
     };
 
     return (
@@ -36,7 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 <input
                     type="text"
                     placeholder="Input name..."
-                    // value={searchQuery}
+                    value={searchQuery}
                     onChange={handleSearchChange}
                     className={styles.searchInput}
                 />
