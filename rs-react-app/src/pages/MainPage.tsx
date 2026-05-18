@@ -1,5 +1,5 @@
-import React from 'react';
-import { useMatch } from 'react-router-dom';
+import { useCallback } from 'react';
+import { useSearchParams, Outlet, useNavigate, useMatch } from 'react-router-dom';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PokemonList from '../components/PokemonList/PokemonList';
 import ErrorTest from '../components/ErrorTest/ErrorTest';
@@ -16,9 +16,31 @@ import styles from './MainPage.module.css';
 
 
 const MainPage: React.FC = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     // Match the nested details route to know if detail panel is open
     const detailMatch = useMatch('/details/:detailId');
     const hasDetail = Boolean(detailMatch);
+
+    const handlePageChange = useCallback(
+        (page: number) => {
+            setSearchParams(prev => {
+                const next = new URLSearchParams(prev);
+                next.set('page', String(page));
+                return next;
+            });
+        },
+        [setSearchParams]
+    );
+
+    // const {
+    //     paginatedPokemons,
+    //     loading,
+    //     error,
+    //     currentPage,
+    //     totalPages,
+    //     handleSearch,
+    //     setPage,
+    // } = usePokemonSearch(urlPage, handlePageChange);
 
     return (
         <div className={`${styles.layout} ${hasDetail ? styles.splitLayout : ''}`}>
@@ -27,17 +49,17 @@ const MainPage: React.FC = () => {
                 <p>Find your favorite Pokémon by name!</p>
             </header>
 
-            {/* Stop propagation so clicks inside don't close detail */}
+
             <main className={styles.main} onClick={e => e.stopPropagation()}>
-                {/* <SearchBar onSearch={handleSearch} /> */}
+                <SearchBar onSearch={''} />
                 <ErrorTest shouldCrash={false} />
 
-                {/* <PokemonList
-                    pokemons={paginatedPokemons}
-                    loading={loading}
-                    error={error}
-                    onSelectPokemon={handleSelectPokemon}
-                /> */}
+                <PokemonList
+                    pokemons={[]}
+                    loading={true}
+                    error={false}
+                    onSelectPokemon={''}
+                />
 
                 {/* {!loading && !error && (
                     <Pagination

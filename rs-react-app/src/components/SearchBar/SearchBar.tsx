@@ -1,5 +1,6 @@
-import React, { type ChangeEvent, type FormEvent } from 'react';
+import { type ChangeEvent, type FormEvent, useState, useEffect } from 'react';
 import styles from './SearchBar.module.css';
+// import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const STORAGE_KEY = 'pokemon_search_query';
 
@@ -7,51 +8,44 @@ interface SearchBarProps {
     onSearch: (query: string) => void;
 }
 
-class SearchBar extends React.Component<SearchBarProps> {
-    state = {
-        searchQuery: '',
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+    // const [savedQuery] = useLocalStorage<string>(STORAGE_KEY, '');
+    // const [searchQuery, setSearchQuery] = useState<string>(savedQuery);
+
+    // useEffect(() => {
+    //     if (savedQuery) {
+    //         setSearchQuery(savedQuery);
+    //         onSearch(savedQuery);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
+
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+        // setSearchQuery(e.target.value);
     };
 
-    componentDidMount() {
-        const saved = localStorage.getItem(STORAGE_KEY) ?? '';
-        if (saved) {
-            this.setState({ searchQuery: saved });
-            this.props.onSearch(saved);
-        }
-    }
-
-    handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({ searchQuery: e.target.value });
-    };
-
-    handleSearchSubmit = (e: FormEvent) => {
+    const handleSearchSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const trimmed = this.state.searchQuery.trim();
-        localStorage.setItem(STORAGE_KEY, trimmed);
-        this.props.onSearch(trimmed);
+        // const trimmed = searchQuery.trim();
+        // onSearch(trimmed);
     };
 
-    render() {
-        return (
-            <div className={styles.searchContainer}>
-                <form onSubmit={this.handleSearchSubmit} className={styles.searchForm}>
-                    <input
-                        type="text"
-                        placeholder="Input name..."
-                        value={this.state.searchQuery}
-                        onChange={this.handleSearchChange}
-                        className={styles.searchInput}
-                    />
-                    <button
-                        type="submit"
-                        className={styles.searchButton}
-                    >
-                        Search
-                    </button>
-                </form>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={styles.searchContainer}>
+            <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
+                <input
+                    type="text"
+                    placeholder="Input name..."
+                    // value={searchQuery}
+                    onChange={handleSearchChange}
+                    className={styles.searchInput}
+                />
+                <button type="submit" className={styles.searchButton}>
+                    Search
+                </button>
+            </form>
+        </div>
+    );
+};
 
 export default SearchBar;
