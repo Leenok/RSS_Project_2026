@@ -36,3 +36,5 @@ const Flyout: React.FC = () => {
         </div>
     );
 };
+
+export default Flyout;

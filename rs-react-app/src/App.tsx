@@ -1,11 +1,14 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
+import Floyout from './components/Flyout/Flyout'
+
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PokemonDetailPanel from './components/PokemonDetailPanel/PokemonDetailPanel';
 import './App.css';
+import { ThemeProvider } from './context/Themecontext';
 
 const RootLayout: React.FC = () => (
   <div>
@@ -49,7 +52,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router} />;
+    </ThemeProvider>
+  )
 }
 
 export default App;
