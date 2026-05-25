@@ -1,0 +1,20 @@
+.fallback {
+    padding: 40px;
+    text-align: center;
+    background: #a24458;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    margin: 20px;
+    color: black;
+}
+
+.resetButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}

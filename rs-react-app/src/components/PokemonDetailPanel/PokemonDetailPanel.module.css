@@ -1,0 +1,173 @@
+.panel {
+  background: var(--bg);
+  color: var(--text);
+  border-left: 2px solid #4caf50;
+  padding: 24px 20px;
+  min-width: 260px;
+  max-width: 340px;
+  position: relative;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s;
+}
+
+.closeBtn:hover {
+  background: #444;
+  color: #fff;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #aaa;
+  margin-top: 40px;
+}
+
+.error {
+  color: #f44336;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--accent-border);
+}
+
+.sprite {
+  width: 140px;
+  height: 140px;
+  image-rendering: pixelated;
+  border-radius: 12px;
+  padding: 8px;
+  background: var(--bg);
+  border-color: var(--accent-border);
+}
+
+.name {
+  font-size: 1.4rem;
+  color: #fff;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.types {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.typeBadge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #4caf50;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.fire {
+  background: #F08030;
+}
+
+.water {
+  background: #6890F0;
+}
+
+.grass {
+  background: #78C850;
+}
+
+.electric {
+  background: #F8D030;
+  color: #333;
+}
+
+.psychic {
+  background: #F85888;
+}
+
+.ice {
+  background: #98D8D8;
+  color: #333;
+}
+
+.dragon {
+  background: #7038F8;
+}
+
+.dark {
+  background: #705848;
+}
+
+.fairy {
+  background: #EE99AC;
+  color: #333;
+}
+
+.fighting {
+  background: #C03028;
+}
+
+.poison {
+  background: #A040A0;
+}
+
+.ground {
+  background: #E0C068;
+  color: #333;
+}
+
+.flying {
+  background: #A890F0;
+}
+
+.bug {
+  background: #A8B820;
+}
+
+.rock {
+  background: #B8A038;
+}
+
+.ghost {
+  background: #705898;
+}
+
+.steel {
+  background: #B8B8D0;
+  color: #333;
+}
+
+.normal {
+  background: #A8A878;
+}
