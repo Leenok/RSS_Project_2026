@@ -1,13 +1,19 @@
 .nav {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px 24px;
-    background: #181825;
-    border-bottom: 1px solid #2a2a3e;
+    background: var(--nav-bg, #181825);
+    border-bottom: 1px solid var(--border, #2a2a3e);
+}
+
+.links {
+    display: flex;
+    gap: 16px;
 }
 
 .link {
-    color: #aaa;
+    color: var(--nav-text, #aaa);
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
@@ -17,11 +23,27 @@
 }
 
 .link:hover {
-    background: #2a2a3e;
-    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--nav-text-active, #fff);
 }
 
 .link.active {
-    color: #4caf50;
-    background: #1a2f1a;
+    color: var(--accent, #4caf50);
+    background: rgba(76, 175, 80, 0.15);
+}
+
+.themeToggle {
+    background: transparent;
+    border: 1px solid var(--nav-text, #aaa);
+    color: var(--nav-text, #aaa);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.themeToggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--nav-text-active, #fff);
 }
