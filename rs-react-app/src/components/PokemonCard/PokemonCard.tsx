@@ -1,5 +1,5 @@
 import { type PokemonDetail } from '../../types/pokemon';
-import { useSelectedItemsStore } from '../../store/selecteditemsstore';
+import { useSelectedItemsStore } from '../../store/selectedItemStore';
 import styles from './PokemonCard.module.css';
 
 interface PokemonCardProps {

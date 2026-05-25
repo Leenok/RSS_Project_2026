@@ -1,6 +1,6 @@
-import { useSelectedItemsStore } from '../../store/selecteditemsstore';
+import { useSelectedItemsStore } from '../../store/selectedItemStore';
 import { downloadSelectedItemsAsCSV } from '../../utils/downloadcsv';
-import styles from './Flyout.module.css';
+import styles from './FlyOut.module.css';
 
 const Flyout: React.FC = () => {
     const selectedItems = useSelectedItemsStore((s) => s.selectedItems);

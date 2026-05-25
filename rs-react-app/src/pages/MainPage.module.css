@@ -33,25 +33,25 @@
     top: 0;
     height: 100vh;
     overflow-y: auto;
-    background: #1e1e2e;
+    background: var(--bg);
     border-left: 2px solid #4caf50;
 }
 
 .header {
     text-align: center;
     padding: 32px 24px 16px;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: var(--header-bg);
     color: #fff;
 }
 
 .header h1 {
     font-size: 2rem;
     margin: 0 0 8px;
-    color: #4caf50;
+    color: var(--text-header);
 }
 
 .header p {
-    color: #aaa;
+    color: var(--text);
     margin: 0;
 }
 

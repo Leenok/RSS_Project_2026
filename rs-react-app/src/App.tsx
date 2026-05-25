@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
-import Floyout from './components/Flyout/Flyout'
+import FlyOut from './components/FlyOut/FlyOut'
 
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
@@ -16,6 +16,7 @@ const RootLayout: React.FC = () => (
     <ErrorBoundary>
       <Outlet />
     </ErrorBoundary>
+    <FlyOut />
   </div>
 );
 

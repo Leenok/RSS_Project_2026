@@ -129,6 +129,9 @@ code {
   --nav-text-active: #111;
   --flyout-bg: #f0f0f0;
   --flyout-text: #111;
+  --aside-bg: #6d6dff17;
+  --text-header: #224e23;
+  --header-bg: linear-gradient(135deg, #c1c1ee 0%, #9bb2f1 100%);
   background: var(--bg);
   color: var(--text);
 }
@@ -147,6 +150,9 @@ code {
   --nav-text-active: #fff;
   --flyout-bg: #181825;
   --flyout-text: #fff;
+  --aside-bg: #1e1e2e;
+  --text-header: #4caf50;
+  --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   background: var(--bg);
   color: var(--text);
 }
