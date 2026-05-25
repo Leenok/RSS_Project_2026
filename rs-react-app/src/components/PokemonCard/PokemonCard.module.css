@@ -39,3 +39,26 @@
     font-style: italic;
     margin: 5px 0 0 0;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
+.selected {
+    border-color: var(--accent, #aa3bff);
+    box-shadow: 0 0 0 2px var(--accent, #aa3bff);
+}
+
+.checkboxWrapper {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent, #aa3bff);
+}
