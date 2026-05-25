@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
-import FlyOut from './components/FlyOut/FlyOut'
+import FlyOut from './components/Flyout/Flyout'
 
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PokemonDetailPanel from './components/PokemonDetailPanel/PokemonDetailPanel';
 import './App.css';
-import { ThemeProvider } from './context/Themecontext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const RootLayout: React.FC = () => (
   <div>
