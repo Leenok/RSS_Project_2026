@@ -1,0 +1,58 @@
+.flyout {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1126px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--flyout-bg, #181825);
+    color: var(--flyout-text, #fff);
+    border-top: 2px solid var(--accent);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.count {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btnPrimary,
+.btnSecondary {
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.btnPrimary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btnPrimary:hover {
+    background: #7e22ce;
+}
+
+.btnSecondary {
+    background: transparent;
+    color: var(--flyout-text, #fff);
+    border: 1px solid var(--flyout-text, #fff);
+}
+
+.btnSecondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
