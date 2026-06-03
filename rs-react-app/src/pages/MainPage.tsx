@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
 
     const handlePageChange = useCallback(
         (page: number) => {
-            setSearchParams(prev => {
+            setSearchParams((prev) => {
                 const next = new URLSearchParams(prev);
                 next.set('page', String(page));
                 return next;
@@ -35,6 +35,7 @@ const MainPage: React.FC = () => {
         totalPages,
         handleSearch,
         setPage,
+        refresh,
     } = usePokemonSearch(urlPage, handlePageChange);
 
     const handleSelectPokemon = useCallback(
@@ -62,9 +63,19 @@ const MainPage: React.FC = () => {
                     <p>Find your favorite Pokémon by name!</p>
                 </header>
 
-                <main className={styles.main} onClick={e => e.stopPropagation()}>
+                <main className={styles.main} onClick={(e) => e.stopPropagation()}>
                     <SearchBar onSearch={handleSearch} />
                     <ErrorTest shouldCrash={false} />
+
+                    <button
+                        type="button"
+                        className={styles.refreshButton}
+                        onClick={refresh}
+                        disabled={loading}
+                        data-testid="refresh-button"
+                    >
+                        {loading ? 'Loading…' : '🔄 Refresh'}
+                    </button>
 
                     <PokemonList
                         pokemons={paginatedPokemons}
@@ -96,7 +107,7 @@ const MainPage: React.FC = () => {
             </div>
 
             {hasDetail && (
-                <div className={styles.rightPanel} onClick={e => e.stopPropagation()}>
+                <div className={styles.rightPanel} onClick={(e) => e.stopPropagation()}>
                     <Outlet />
                 </div>
             )}
