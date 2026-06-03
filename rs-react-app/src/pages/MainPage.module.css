@@ -80,3 +80,27 @@ footer {
 .testErrorButton:hover {
     background: rgba(244, 67, 54, 0.1);
 }
+
+.refreshButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    padding: 0.45rem 1rem;
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.refreshButton:hover:not(:disabled) {
+    background: #1976d2;
+}
+
+.refreshButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
