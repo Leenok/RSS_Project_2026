@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar/NavBar'
 import FlyOut from './components/Flyout/Flyout'
 
 import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
+import FormsPage from './pages/FormsPage';
 import PokemonDetailPanel from './components/PokemonDetailPanel/PokemonDetailPanel';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         element: <AboutPage />,
       },
       {
+        path: 'forms',
+        element: <FormsPage />,
+      },
+      {
         path: '404',
         element: <NotFoundPage />,
       },
@@ -55,7 +60,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }

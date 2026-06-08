@@ -16,6 +16,12 @@ const NavBar: React.FC = () => {
                     🏠 Home
                 </NavLink>
                 <NavLink
+                    to="/forms"
+                    className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
+                >
+                    📝 Forms
+                </NavLink>
+                <NavLink
                     to="/about"
                     className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
                 >
