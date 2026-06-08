@@ -1,0 +1,71 @@
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary, #111827);
+    margin: 0 0 0.5rem;
+}
+
+.header p {
+    color: var(--text-secondary, #6b7280);
+    font-size: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.openBtn {
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    color: #fff;
+}
+
+.openBtn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.ucBtn {
+    background: #6366f1;
+}
+
+.rhfBtn {
+    background: #10b981;
+}
+
+.submissions {
+    margin-top: 1rem;
+}
+
+.submissionsTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary, #111827);
+    margin-bottom: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
