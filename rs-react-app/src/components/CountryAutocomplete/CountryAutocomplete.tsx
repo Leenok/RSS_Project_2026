@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, type ChangeEvent } from 'react';
-import { useFormStore } from '../../store/FormStory';
+import { useFormStore } from '../../store/formStore';
 import styles from './CountryAutocomplete.module.css';
 
 interface Props {
