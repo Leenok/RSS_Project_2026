@@ -1,0 +1,106 @@
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.splitLayout {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.leftPanel {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+
+.splitLayout .leftPanel {
+    cursor: pointer;
+}
+
+.splitLayout .leftPanel>* {
+    cursor: default;
+}
+
+.rightPanel {
+    flex-shrink: 0;
+    min-width: 280px;
+    max-width: 360px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--bg);
+    border-left: 2px solid #4caf50;
+}
+
+.header {
+    text-align: center;
+    padding: 32px 24px 16px;
+    background: var(--header-bg);
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin: 0 0 8px;
+    color: var(--text-header);
+}
+
+.header p {
+    color: var(--text);
+    margin: 0;
+}
+
+.main {
+    padding: 16px 24px;
+    flex: 1;
+}
+
+footer {
+    padding: 16px 24px;
+    text-align: center;
+    border-top: 1px solid #2a2a3e;
+}
+
+.testErrorButton {
+    background: transparent;
+    border: 1px solid #f44336;
+    color: #f44336;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.testErrorButton:hover {
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.refreshButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    padding: 0.45rem 1rem;
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.refreshButton:hover:not(:disabled) {
+    background: #1976d2;
+}
+
+.refreshButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

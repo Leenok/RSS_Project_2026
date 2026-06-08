@@ -1,0 +1,55 @@
+.container {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    background: var(--input-bg, #fff);
+    color: var(--text-primary, #111827);
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #6366f1;
+}
+
+.inputError {
+    border-color: #ef4444;
+}
+
+.suggestions {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: var(--card-bg, #fff);
+    border: 1.5px solid #d1d5db;
+    border-radius: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 100;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-primary, #111827);
+    transition: background 0.1s;
+}
+
+.option:hover,
+.option[aria-selected='true'] {
+    background: #ede9fe;
+    color: #4f46e5;
+}
